@@ -54,6 +54,31 @@ public class JobData {
         return allJobs;
     }
 
+    // Here we search all columns by search term. Returning results with no duplicates
+
+    public static ArrayList<HashMap<String,String>> findByValue(String value){
+
+        loadData();
+
+        ArrayList<HashMap<String,String>> jobs = new ArrayList<>();
+        value=value.toLowerCase();
+
+        for(HashMap<String,String> row : allJobs){
+
+            for(String column : row.keySet()){
+
+                String ajob = row.get(column);
+                ajob = ajob.toLowerCase();
+
+                if(ajob.contains(value)){
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
+        return jobs;
+    }
+
     /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
